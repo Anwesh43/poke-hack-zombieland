@@ -1,0 +1,99 @@
+-----------------------------------------------------------------------------------------
+--
+-- main.lua
+--
+-----------------------------------------------------------------------------------------
+
+-- Your code here
+-- zombieService = require('zombieService')
+-- n = 50
+--
+-- local bullets = {}
+-- local index = 0
+-- local bg = display.newRect(0,0,display.contentWidth*2.25,display.contentHeight*3)
+-- local scoreText = display.newText(string.format("zombies left:%s",n),display.contentWidth/2,display.contentHeight/3,"arial",40)
+-- scoreText:setFillColor(0,0,0)
+-- local firstBullet = nil
+-- local player = display.newSprite(graphics.newImageSheet("another_player.png",{width=750,height=800,numFrames=2,sheetContentWidth=1500,sheetContentHeight=800}),{name="shoot",start=1,count=2,time=250})
+-- player.x = 30
+-- player.y = display.contentHeight-50
+-- player.xScale=0.1
+-- player.yScale=0.12
+-- local zombies = zombieService.getZombiesForAnArea(display.contentWidth,display.contentHeight,n)
+-- function shoot()
+--     bullet = display.newImage("bullet1.png")
+--     bullet.x = 40
+--     bullet.y = display.contentHeight - 60
+--     table.insert(bullets,table.maxn(bullets),bullet)
+-- end
+-- function moveBullet()
+--     for index,bullet in ipairs(bullets)
+--     do
+--         bullet.x = bullet.x+10
+--     end
+-- end
+-- function checkForZombiePlayerCollision()
+--     for index,zombie in ipairs(zombies)
+--     do
+--         if(player ~= nil and player.x ~=nil and zombie~= null and zombie.x <= player.x)
+--         then
+--             table.remove(zombies,index)
+--             display.remove(zombie)
+--
+--             Runtime:removeEventListener("enterFrame",enterFrame)
+--             display.remove(player)
+--             for index,zombie in ipairs(zombies)
+--             do
+--                 display.remove(zombie)
+--                 table.remove(zombies,index)
+--                 scoreText.text="mission failed!"
+--             end
+--             break
+--         end
+--     end
+-- end
+-- function checkForBulletZombieCollision()
+--     for index,bullet in ipairs(bullets)
+--     do
+--       for zindex,zombie in ipairs(zombies)
+--       do
+--           if(bullet.x+bullet.width >= zombie.x and bullet.x<=display.contentWidth)
+--           then
+--
+--               display.remove(zombie)
+--               table.remove(zombies,zindex)
+--               display.remove(bullet)
+--               table.remove(bullets,index)
+--               scoreText.text=string.format("zombies left:%s",table.maxn(zombies))
+--               if(table.maxn(zombies) == 0)
+--               then
+--                   scoreText.text="Mission Accomplished"
+--                   Runtime:removeEventListener("enterFrame",enterFrame)
+--               end
+--           end
+--       end
+--     end
+-- end
+-- function drawZombies()
+--     for index,zombieAnimation in ipairs(zombies)
+--     do
+--         zombieAnimation.x= zombieAnimation.x-10
+--         zombieAnimation:play()
+--     end
+-- end
+--
+-- function render()
+--     drawZombies()
+--     moveBullet()
+--     checkForBulletZombieCollision()
+--     checkForZombiePlayerCollision()
+-- end
+-- function enterFrame()
+--     timer.performWithDelay(200,render)
+-- end
+-- display.currentStage:addEventListener("tap",shoot)
+-- Runtime:addEventListener("enterFrame",enterFrame)
+
+
+composer = require('composer')
+composer.gotoScene('shootingScene')
