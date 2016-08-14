@@ -107,7 +107,7 @@ function checkForNearestZombieAreas(latitude,longitude)
     end
     table.sort(zombieAreasDistances)
     print(zombieAreasDistances[1])
-    if(zombieAreasDistances[1]<10)
+    if(zombieAreasDistances[1]<50)
     then
        locationText.text="Close to a zombie affected area"
        startGameBtn.alpha = 1
@@ -136,12 +136,13 @@ function scene:create(event)
 
     mapGroup:insert(startGameBtn)
     mapGroup:insert(locationText)
-    locationHandler()
+
 
 
 end
 function scene:show(event)
     updatedLocation = 0
+    locationHandler()
     timer.performWithDelay( 1000,function()
         Runtime:addEventListener("location",locationHandler)
     end )
