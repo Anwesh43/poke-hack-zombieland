@@ -9,16 +9,22 @@ local scoreText = nil
 local player = nil
 local zombies = {}
 function shoot()
-    bullet = display.newImage("bullet1.png")
+    bullet = display.newImage("bullet_v1.png")
     bullet.x = 40
     bullet.y = display.contentHeight - 60
-    sceneGroup:insert(bullet)
+    if(sceneGroup~=nil and sceneGroup.insert~=nil)
+    then
+        sceneGroup:insert(bullet)
+    end
     table.insert(bullets,table.maxn(bullets),bullet)
 end
 function moveBullet()
     for index,bullet in ipairs(bullets)
     do
+        if(bullet~=nil and bullet.x ~=nil)
+        then
         bullet.x = bullet.x+10
+        end
     end
 end
 function checkForZombiePlayerCollision()
@@ -35,8 +41,13 @@ function checkForZombiePlayerCollision()
             do
                 display.remove(zombie)
                 table.remove(zombies,index)
-                scoreText.text="mission failed!"
             end
+            bullets = {}
+            scoreText.text="mission failed!"
+            timer.performWithDelay( 2000, function()
+                composer.gotoScene("mapScene")
+                composer.removeScene("shootingScene",true)
+            end)
             break
         end
     end
@@ -46,18 +57,25 @@ function checkForBulletZombieCollision()
     do
       for zindex,zombie in ipairs(zombies)
       do
-          if(bullet.x+bullet.width >= zombie.x and bullet.x<=display.contentWidth)
+          if(bullet.x+bullet.width/2 >= zombie.x and bullet.x<=display.contentWidth)
           then
 
               display.remove(zombie)
               table.remove(zombies,zindex)
               display.remove(bullet)
               table.remove(bullets,index)
+
               scoreText.text=string.format("zombies left:%s",table.maxn(zombies))
               if(table.maxn(zombies) == 0)
               then
+
                   scoreText.text="Mission Accomplished"
+                  bullets = {}
                   Runtime:removeEventListener("enterFrame",enterFrame)
+                  timer.performWithDelay( 2000, function()
+                      composer.gotoScene("mapScene")
+                      composer.removeScene("shootingScene",true)
+                  end)
               end
           end
       end

@@ -96,4 +96,5 @@
 
 
 composer = require('composer')
-composer.gotoScene('shootingScene')
+--composer.gotoScene('shootingScene')
+composer.gotoScene('mapScene')
