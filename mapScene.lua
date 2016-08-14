@@ -40,7 +40,7 @@ else
 
   local zshop =
   {
-       title = "Shop",
+       title = "ZombieStop",
        subtitle = "",
        listener = markerListener,
        imageFile =  "smarker.png",
@@ -48,7 +48,7 @@ else
 
   local zifst =
   {
-       title = "Zombie Infested Area",
+       title = "Zombieland",
        subtitle = "",
        listener = markerListener,
        imageFile =  "zmarker.png",
@@ -107,7 +107,7 @@ function checkForNearestZombieAreas(latitude,longitude)
     end
     table.sort(zombieAreasDistances)
     print(zombieAreasDistances[1])
-    if(zombieAreasDistances[1]<5)
+    if(zombieAreasDistances[1]<10)
     then
        locationText.text="Close to a zombie affected area"
        startGameBtn.alpha = 1
@@ -141,6 +141,7 @@ function scene:create(event)
 
 end
 function scene:show(event)
+    updatedLocation = 0
     timer.performWithDelay( 1000,function()
         Runtime:addEventListener("location",locationHandler)
     end )
